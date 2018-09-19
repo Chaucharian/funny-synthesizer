@@ -7,4 +7,4 @@ A interactive experience wich use a arduino-uno to capture the motion by measuri
 distance betweeen the arduino and user's hands, generating image and sound randomly. 
 The sound will be a kind of synthesizer and the image a kind of psychedelia 
 
-Run!<b> npm run dev </b>and open the browser at<a href="http://localhost:3000"> localhost:3000 </a>
+In order to get the app running first type <b>yarn</b>, then <b> yarn run dev</b> and open the browser at<a href="http://localhost:3000"> localhost:3000 </a>

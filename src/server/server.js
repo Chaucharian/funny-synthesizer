@@ -6,9 +6,10 @@ const io = require('socket.io')(http);
 const SerialPort = require("serialport");
 
 const Readline = SerialPort.parsers.Readline;
-const port = new SerialPort('COM4', { autoOpen: false, baudRate: 9600 });
+const port = new SerialPort('/dev/tty.usbmodem1411', { autoOpen: false, baudRate: 9600 }); //windows COM4 | mac /dev
 const parser = new Readline();
 port.pipe(parser);
+
 
 //public folders where the user catch dependencies
 app.use(express.static(path.resolve(__dirname, '../public')) );
@@ -26,8 +27,8 @@ io.on('connection', (socket) => {
 });
 //Open arduino port
 port.open(function (err) {
-  if (err) {
-    return console.log('Error opening port: ', err.message);
+  if(err) {
+     console.log('Error opening port: ', err.message);
   }
 
   // Because there's no callback to write, write errors will be emitted on the port:
@@ -41,6 +42,8 @@ port.on('open', function() {
 });
 
 parser.on('data', function (data) {
-  let distance = data.split(':')[1].split('/')[0];
-  io.emit('sendDistance', distance);
+ // console.log(data);
+  io.emit('sendDistance', data);
+  /*let distance = data.split(':')[1].split('/')[0];
+  io.emit('sendDistance', distance);*/
 });

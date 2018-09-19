@@ -10,8 +10,8 @@ class Main {
 
     this.loadListenner();
     this.io.on('sendDistance', (value) => {
-      this.animation.setX(value);
-      this.synthesizer.changeGain(value*2);
+      this.animation.create(value);
+      this.synthesizer.create(value);
     })
   }
 

@@ -20,12 +20,27 @@ export default class Synthesizer {
 
     this.oscillator.start(0);
   }
+  
+  create(currentDistance) {
+    if(currentDistance > 150) {
+      this.oscillator.type = 'triangle';
+    } else {
+      this.oscillator.type = 'sine';
+    }
+    this.changeGain(this.getFrequency(currentDistance));
+  }
 
   changeGain(gain) {
-    this.oscillator.frequency.value = gain ;
-    if(this.pressing) {
+    this.oscillator.frequency.value = gain;
+    /*if(this.pressing) {
         this.gain.gain.exponentialRampToValueAtTime(gain, this.context.currentTime + 0.04);
-    }
+    }*/
+  }
+
+  getFrequency(currentDistance) {
+    const baseTone = 250;
+    const baseDistance = 10;
+    return currentDistance * baseTone / baseDistance;
   }
 
   validateKey(key) {
@@ -60,6 +75,7 @@ export default class Synthesizer {
   }
 
   playNote(frequency) {
+    
     this.oscillator.frequency.value = frequency;
     this.gain.gain.exponentialRampToValueAtTime(1, this.context.currentTime + 0.04);
   }

@@ -37,11 +37,28 @@ export default class Animation {
 
     // For every x value, calculate a y value with sine function
   //  this.x = this.theta;
-    this.y = p5.sin(this.x)* this.amplitude;
+    //this.y = p5.sin(this.x)* this.amplitude;
   }
 
   setX(value) {
-    this.x = window.innerWidth / 2 + value *.1;
+    this.x = window.innerWidth / 2 + value;
     this.rangeColor = value * .2;
+  }
+
+  create(value) {
+    this.x = this.getScale(value);
+    this.rangeColor =  this.getColor(value);
+  }
+
+  getScale(currentDistance) {
+    const maxDistance = 200;
+    const windowWidth  = window.innerWidth;
+    return currentDistance * windowWidth / maxDistance;
+  }
+
+  getColor(currentDistance) {
+    const baseColor = 12;
+    const baseDistance = 10;
+    return currentDistance * baseColor / baseDistance;
   }
 }
